@@ -10,8 +10,8 @@ const app: Application = express();
 const port = config.port;
 
 app.use(express.json());
-app.use(express.text());
-app.use(express.urlencoded({ extended: true }));
+// app.use(express.text());
+// app.use(express.urlencoded({ extended: true }));
 
 const pool = new Pool({
   connectionString: config.connection_string,
@@ -20,7 +20,8 @@ const pool = new Pool({
 const initDB = async () => {
   try {
     await pool.query(`
-        CREATE TABLE IF NOT EXISTS users(
+        CREATE TABLE IF NOT EXISTS users
+        (
         id SERIAL PRIMARY KEY,
         name VARCHAR(20),
         email VARCHAR(20) UNIQUE NOT NULL,
@@ -32,9 +33,21 @@ const initDB = async () => {
         updated_at TIMESTAMP DEFAULT NOW()
         )
             `);
+    await pool.query(`CREATE TABLE IF NOT EXISTS products
+              (
+              id SERIAL PRIMARY KEY,
+              name VARCHAR(200) NOT NULL,
+              price DECIMAL(10,2) NOT NULL,
+              stock INT DEFAULT 0,
+              
+        created_at TIMESTAMP DEFAULT NOW(),
+        updated_at TIMESTAMP DEFAULT NOW()
+              
+              
+              )`);
     console.log("Database connected successfully!");
   } catch (error) {
-    console.log(error);
+    console.log("Database Initialization Error:", error);
   }
 };
 initDB();
@@ -42,13 +55,12 @@ initDB();
 app.get("/", (req: Request, res: Response) => {
   //res.send("Hello World!");
   res.status(200).json({
-    message: "Express Server",
-    author: "Next Level",
+    message: "Express Server Runing",
+    author: "Ayas Ibrahim",
   });
 });
 
 app.post("/api/users", async (req: Request, res: Response) => {
-  //   console.log(req.body);
   const { name, email, password, age } = req.body;
 
   try {
@@ -202,5 +214,5 @@ app.delete("/api/users/:id", async (req: Request, res: Response) => {
 });
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+  console.log(`App listening on port ${port}`);
 });
