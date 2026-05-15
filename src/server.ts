@@ -33,7 +33,9 @@ const initDB = async () => {
         updated_at TIMESTAMP DEFAULT NOW()
         )
             `);
-    await pool.query(`CREATE TABLE IF NOT EXISTS products
+    await pool.query(`
+    
+      CREATE TABLE IF NOT EXISTS products
               (
               id SERIAL PRIMARY KEY,
               name VARCHAR(200) NOT NULL,
@@ -86,6 +88,27 @@ app.post("/api/users", async (req: Request, res: Response) => {
   }
 });
 
+app.post("/api/products", async (req: Request, res: Response) => {
+  const { name, price, stock } = req.body;
+  try {
+    const result = await pool.query(
+      `INSERT INTO products (name,price,stock) VALUES($1,$2,$3) RETURNING *`,
+      [name, price, stock],
+    );
+    res.status(201).json({
+      success: true,
+      message: "Product Created Successfully",
+      data: result.rows[0],
+    });
+  } catch (error: any) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+      error: error,
+    });
+  }
+});
+
 app.get("/api/users", async (req: Request, res: Response) => {
   try {
     const result = await pool.query(`
@@ -94,6 +117,24 @@ app.get("/api/users", async (req: Request, res: Response) => {
     res.status(200).json({
       success: true,
       message: "Users retrived successfully!",
+      data: result.rows,
+    });
+  } catch (error: any) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+      error: error,
+    });
+  }
+});
+app.get("/api/products", async (req: Request, res: Response) => {
+  try {
+    const result = await pool.query(`
+      SELECT * FROM products
+      `);
+    res.status(200).json({
+      success: true,
+      message: "Products Retrived Successfully",
       data: result.rows,
     });
   } catch (error: any) {
@@ -137,6 +178,31 @@ app.get("/api/users/:id", async (req: Request, res: Response) => {
   }
 });
 
+app.get("/api/products/:id", async (req: Request, res: Response) => {
+  const { id } = req.params;
+  try {
+    const result = await pool.query(`SELECT * FROM products WHERE id=$1`, [id]);
+
+    if (result.rows.length === 0) {
+      res.status(404).json({
+        success: false,
+        message: "User Not found!",
+        data: {},
+      });
+    }
+    res.status(200).json({
+      success: true,
+      message: "User Found Successfully",
+      data: result.rows[0],
+    });
+  } catch (error: any) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+      error: error,
+    });
+  }
+});
 app.put("/api/users/:id", async (req: Request, res: Response) => {
   const { id } = req.params;
   const { name, password, age, is_active } = req.body;
@@ -181,6 +247,41 @@ app.put("/api/users/:id", async (req: Request, res: Response) => {
   }
 });
 
+app.put("/api/products/:id", async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const { name, price, stock } = req.body;
+  try {
+    const result = await pool.query(
+      `UPDATE  products
+       SET
+        name=COALESCE($1,name) ,
+        price=COALESCE($2,price),
+         stock=COALESCE($3,stock)
+          WHERE id=$4 RETURNING *`,
+      [name, price, stock, id],
+    );
+    if (result.rows.length === 0) {
+      res.status(404).json({
+        success: false,
+        message: "Product Not found!",
+      });
+    }
+
+    // console.log(result);
+    res.status(200).json({
+      success: true,
+      message: "Product updated successfully!",
+      data: result.rows[0],
+    });
+  } catch (error: any) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+      error: error,
+    });
+  }
+});
+
 app.delete("/api/users/:id", async (req: Request, res: Response) => {
   const { id } = req.params;
   try {
@@ -191,7 +292,6 @@ app.delete("/api/users/:id", async (req: Request, res: Response) => {
       [id],
     );
 
-    console.log(result);
     if (result.rowCount === 0) {
       res.status(404).json({
         success: false,
@@ -202,6 +302,31 @@ app.delete("/api/users/:id", async (req: Request, res: Response) => {
     res.status(200).json({
       success: true,
       message: "User deleted successfully!",
+      data: {},
+    });
+  } catch (error: any) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+      error: error,
+    });
+  }
+});
+app.delete("/api/products/:id", async (req: Request, res: Response) => {
+  const { id } = req.params;
+  try {
+    const result = await pool.query(`DELETE  FROM products WHERE id=$1`, [id]);
+
+    if (result.rowCount === 0) {
+      res.status(404).json({
+        success: false,
+        message: "Product Not found!",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Product deleted successfully!",
       data: {},
     });
   } catch (error: any) {
