@@ -7,6 +7,7 @@ export const pool = new Pool({
 
 export const initDB = async () => {
   try {
+    
     await pool.query(`
       
         CREATE TABLE IF NOT EXISTS users
@@ -23,6 +24,7 @@ export const initDB = async () => {
         )
             `);
     await pool.query(`
+      
                 CREATE TABLE IF NOT EXISTS profiles(
               id SERIAL PRIMARY KEY,
               user_id INT UNIQUE REFERENCES users(id) ON DELETE CASCADE,
