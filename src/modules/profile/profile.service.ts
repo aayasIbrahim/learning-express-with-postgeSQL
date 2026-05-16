@@ -1,7 +1,8 @@
 import { error } from "node:console";
 import { pool } from "../../db";
+import type { IUserProfile } from "./profile.interface";
 
-const createUserIntoDB = async (payload: any) => {
+const createUserIntoDB = async (payload: IUserProfile) => {
   const { user_id, bio, address, phone, gender } = payload;
 
   const user = await pool.query(`SELECT * FROM users WHERE id=$1`, [

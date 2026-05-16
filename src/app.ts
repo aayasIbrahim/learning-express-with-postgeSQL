@@ -24,6 +24,6 @@ app.get("/", (req: Request, res: Response) => {
 
 app.use("/api/users", userRoute);
 app.use("/api/products", productRoute);
-app.use("/api/profile",profileRoute)
+app.use("/api/profile", profileRoute);
 
 export default app;
