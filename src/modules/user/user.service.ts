@@ -1,6 +1,7 @@
 import { pool } from "../../db";
+import type { IUser } from "./user.interface";
 
-const createUserIntoDB = async (payload: any) => {
+const createUserIntoDB = async (payload: IUser) => {
   const { name, email, password, age } = payload;
   const result = await pool.query(
     `
@@ -25,7 +26,7 @@ const getSingleUserFromDB = async (id: string | number) => {
   );
   return result;
 };
-const updateUserFromDB = async (payload: any, id: string) => {
+const updateUserFromDB = async (payload: IUser, id: string) => {
   const { name, password, age, is_active } = payload;
   const result = await pool.query(
     `
@@ -56,5 +57,5 @@ export const userService = {
   getAllUserFromDB,
   getSingleUserFromDB,
   updateUserFromDB,
-  deleteUserFromDB
+  deleteUserFromDB,
 };
