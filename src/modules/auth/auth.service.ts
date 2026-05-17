@@ -21,27 +21,27 @@ const loginUserIntoDB = async (payload: any) => {
   // 2. Compare the password -> Done
   const user = userData.rows[0];
 
-  console.log("Plain Password:", password, typeof password);
-  console.log("Hashed Password:", user?.password, typeof user?.password);
+  // console.log("Plain Password:", password, typeof password);
+  // console.log("Hashed Password:", user?.password, typeof user?.password);
 
   const matchPassword = await bcrypt.compare(String(password), user.password); ///return boolean
   //   console.log(matchPassword)
 
   if (!matchPassword) {
-    throw new Error("Invalid Credentials");
+    throw new Error("Invalid Credentials and password dontchange");
   }
   //3. Generate Token
-  const jwtPlayload = {
+  const jwtPayload = {
     id: user.id,
     name: user.name,
     email: user.email,
     password: user.password,
     is_active: user.is_active,
   };
-  const accessToken = await jwt.sign(jwtPlayload, config.secret as string, {
+  const accessToken = await jwt.sign(jwtPayload, config.secret as string, {
     expiresIn: "1d",
   });
-  //   console.log('AccessToken',accessToken)
+    // console.log('AccessToken',accessToken)
 
   return { accessToken };
 };

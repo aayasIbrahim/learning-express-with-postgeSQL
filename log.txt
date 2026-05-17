@@ -1,0 +1,4 @@
+
+This is GET method and Url ==> /api/users, and Time is 01:05:48 AM
+
+This is GET method and Url ==> /api/products, and Time is 01:05:57 AM
