@@ -9,7 +9,7 @@ const router = Router();
 router.post("/", userController.createUser);
 router.get(
   "/",
-  auth(USER_ROLE.admin),
+  auth(USER_ROLE.admin,USER_ROLE.user),
   userController.getAllUser,
 );
 router.get("/:id", userController.getSingleUser);

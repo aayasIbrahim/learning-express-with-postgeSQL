@@ -1,13 +1,20 @@
 import type { Request, Response } from "express";
 
 import { authService } from "./auth.service";
+import config from "../../config";
 
 const userLogin = async (req: Request, res: Response) => {
   try {
-  const result=  await authService.loginUserIntoDB(req.body);
-   res.status(200).json({
+    const result = await authService.loginUserIntoDB(req.body);
+    const { refreshToken } = result;
+    res.cookie("refreshToken", refreshToken, {
+      secure: config.node_env === "production" ? true : false,
+      httpOnly: true,
+      sameSite: config.node_env === "production" ? "none" : "lax",
+    });
+    res.status(200).json({
       success: true,
-      message: "User retrived successfully!",
+      message: "login successfully!",
       data: result,
     });
   } catch (error: any) {
@@ -19,6 +26,28 @@ const userLogin = async (req: Request, res: Response) => {
     });
   }
 };
+const refreshToken = async (req: Request, res: Response) => {
+  try {
+    const result = await authService.genarateRefreshToken(
+      req.cookies.refreshToken,
+    );
+
+    res.status(200).json({
+      success: true,
+      message: "Access Token Genarated Successfully!",
+      data: result,
+    });
+  } catch (error: any) {
+    console.error(error);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+      error: error,
+    });
+  }
+};
+
 export const authController = {
   userLogin,
+  refreshToken,
 };
