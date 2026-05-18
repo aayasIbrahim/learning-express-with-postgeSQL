@@ -2,3 +2,91 @@
 This is GET method and Url ==> /api/users, and Time is 01:05:48 AM
 
 This is GET method and Url ==> /api/products, and Time is 01:05:57 AM
+
+This is GET method and Url ==> /api/users, and Time is 12:13:43 PM
+
+This is GET method and Url ==> /api/users, and Time is 12:15:16 PM
+
+This is GET method and Url ==> /api/users, and Time is 12:20:31 PM
+
+This is GET method and Url ==> /api/users, and Time is 12:21:48 PM
+
+This is POST method and Url ==> /api/users, and Time is 12:23:17 PM
+
+This is POST method and Url ==> /api/users, and Time is 12:23:37 PM
+
+This is POST method and Url ==> /api/users, and Time is 12:23:50 PM
+
+This is POST method and Url ==> /api/users, and Time is 12:24:16 PM
+
+This is POST method and Url ==> /api/users, and Time is 12:24:33 PM
+
+This is GET method and Url ==> /api/users, and Time is 12:28:26 PM
+
+This is GET method and Url ==> /api/users, and Time is 12:29:01 PM
+
+This is GET method and Url ==> /api/users, and Time is 12:29:27 PM
+
+This is GET method and Url ==> /api/users, and Time is 12:31:03 PM
+
+This is GET method and Url ==> /api/users, and Time is 12:31:33 PM
+
+This is POST method and Url ==> /api/users, and Time is 12:35:59 PM
+
+This is POST method and Url ==> /api/auth/login, and Time is 12:36:36 PM
+
+This is GET method and Url ==> /api/users, and Time is 12:37:39 PM
+
+This is GET method and Url ==> /api/users, and Time is 12:44:56 PM
+
+This is GET method and Url ==> /api/users, and Time is 12:45:09 PM
+
+This is GET method and Url ==> /api/users, and Time is 12:45:49 PM
+
+This is GET method and Url ==> /api/users, and Time is 12:46:00 PM
+
+This is GET method and Url ==> /api/users, and Time is 12:46:23 PM
+
+This is GET method and Url ==> /api/users, and Time is 12:47:56 PM
+
+This is POST method and Url ==> /api/auth/login, and Time is 12:48:34 PM
+
+This is GET method and Url ==> /api/users, and Time is 12:49:00 PM
+
+This is GET method and Url ==> /api/users, and Time is 12:52:40 PM
+
+This is GET method and Url ==> /api/users, and Time is 12:56:05 PM
+
+This is GET method and Url ==> /api/users, and Time is 12:56:16 PM
+
+This is GET method and Url ==> /api/users, and Time is 12:56:34 PM
+
+This is POST method and Url ==> /api/users, and Time is 12:57:47 PM
+
+This is POST method and Url ==> /api/users, and Time is 01:07:05 PM
+
+This is POST method and Url ==> /api/auth/login, and Time is 01:07:59 PM
+
+This is POST method and Url ==> /api/auth/login, and Time is 01:08:36 PM
+
+This is GET method and Url ==> /api/users, and Time is 01:09:20 PM
+
+This is GET method and Url ==> /api/users, and Time is 01:13:22 PM
+
+This is GET method and Url ==> /api/users, and Time is 01:18:11 PM
+
+This is GET method and Url ==> /api/users, and Time is 01:18:26 PM
+
+This is GET method and Url ==> /api/users, and Time is 01:21:37 PM
+
+This is GET method and Url ==> /api/users, and Time is 12:04:28 AM
+
+This is GET method and Url ==> /api/users/1, and Time is 12:06:43 AM
+
+This is POST method and Url ==> /api/auth/login, and Time is 12:07:20 AM
+
+This is GET method and Url ==> /api/users, and Time is 12:07:47 AM
+
+This is GET method and Url ==> /api/users, and Time is 12:08:20 AM
+
+This is GET method and Url ==> /api/users, and Time is 12:09:36 AM
